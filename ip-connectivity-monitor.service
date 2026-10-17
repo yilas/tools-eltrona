@@ -1,0 +1,20 @@
+[Unit]
+Description=IPv4 and IPv6 recovery monitor with Telegram notification
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=ipmonitor
+Group=ipmonitor
+EnvironmentFile=/etc/ip-connectivity-monitor.env
+ExecStart=/usr/bin/python3 /opt/ip-connectivity-monitor/monitor.py
+Restart=always
+RestartSec=10
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/ip-connectivity-monitor
+
+[Install]
+WantedBy=multi-user.target
