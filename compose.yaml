@@ -1,0 +1,11 @@
+services:
+  connectivity-monitor:
+    build: .
+    restart: unless-stopped
+    init: true
+    network_mode: host # Linux: reuse host IPv4 + IPv6 connectivity
+    env_file: .env
+    volumes:
+      - monitor-data:/data
+volumes:
+  monitor-data:
